@@ -1,0 +1,1 @@
+Sistema distribuído de processamento de imagens utilizando Node.js e RabbitMQ para processamento async e escalável.
