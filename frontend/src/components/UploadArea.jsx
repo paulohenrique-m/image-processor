@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import './UploadArea.css';
+import '../styles/UploadArea.css';
 
 const UploadArea = ({ onUpload, loading = false }) => {
   const [uploadProgress, setUploadProgress] = useState({});

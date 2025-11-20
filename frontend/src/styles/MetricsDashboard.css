@@ -1,0 +1,166 @@
+.metrics-dashboard {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    height: fit-content;
+  }
+  
+  .metrics-dashboard h3 {
+    color: var(--gray-800);
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  /* Metric Card */
+  .metric-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background: var(--gray-50);
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .metric-card:hover::before {
+    opacity: 1;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .metric-card.blue {
+    border-left-color: var(--primary-blue);
+    color: var(--primary-blue);
+  }
+  
+  .metric-card.green {
+    border-left-color: var(--success-green);
+    color: var(--success-green);
+  }
+  
+  .metric-card.purple {
+    border-left-color: var(--primary-purple);
+    color: var(--primary-purple);
+  }
+  
+  .metric-card.orange {
+    border-left-color: var(--warning-orange);
+    color: var(--warning-orange);
+  }
+  
+  .metric-icon {
+    font-size: 2.5rem;
+    margin-right: 16px;
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+  
+  .metric-content {
+    flex: 1;
+  }
+  
+  .metric-content h3 {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0 0 4px 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .metric-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .metric-subtitle {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    margin: 4px 0 0 0;
+    font-weight: 400;
+  }
+  
+  /* Animation for value changes */
+  .metric-value {
+    transition: all 0.3s ease;
+  }
+  
+  .metric-value.changing {
+    animation: pulseValue 0.6s ease;
+  }
+  
+  @keyframes pulseValue {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .metrics-dashboard {
+      padding: 20px;
+    }
+  
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .metric-card {
+      padding: 16px;
+      flex-direction: column;
+      text-align: center;
+      gap: 12px;
+    }
+  
+    .metric-icon {
+      margin-right: 0;
+      font-size: 2rem;
+    }
+  
+    .metric-value {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+  }

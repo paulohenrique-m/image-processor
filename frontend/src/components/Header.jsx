@@ -1,6 +1,6 @@
 import React from 'react';
 import { useWebSocket } from '../hooks/useWebSocket';
-import './Header.css';
+import '../styles/Header.css';
 
 const Header = () => {
   const { isConnected } = useWebSocket();
