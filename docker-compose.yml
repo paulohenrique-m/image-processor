@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: "3001"
+      RABBITMQ_URL: "amqp://admin:password@rabbitmq:5672"
+      NODE_ENV: "development"
+    restart: unless-stopped
+    command: node src/app.js
+
+  worker:
+    build: ./worker
+    container_name: worker
+    environment:
+      RABBITMQ_URL: "amqp://admin:password@rabbitmq:5672"
+      NODE_ENV: "development"
+    restart: unless-stopped
+    command: node src/app.js
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: "http://localhost:3001/api"
+      REACT_APP_WS_URL: "http://localhost:3001"
+      DISABLE_ESLINT_PLUGIN: "true"
+    restart: unless-stopped
+    command: serve -s build -l 3000

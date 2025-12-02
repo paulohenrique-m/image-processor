@@ -32,7 +32,9 @@ const MetricsDashboard = () => {
 
       return unsubscribe;
     }
-  }, [isConnected, subscribeToMetrics]);
+  // }, [isConnected, subscribeToMetrics]);
+  // adjust this!!!!
+  }, []);
 
   const MetricCard = ({ title, value, icon, color }) => (
     <div className={`metric-card ${color}`}>

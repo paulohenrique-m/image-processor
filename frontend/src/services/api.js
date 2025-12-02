@@ -9,7 +9,6 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    console.log(`doing ${config.method?.toUpperCase()} - ${config.url}`);
     return config;
   },
   (error) => {
@@ -20,11 +19,13 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => {
-    console.log("received:", response.status);
+    if (response.data && response.data.jobs !== undefined) {
+      response.data.jobs = Array.isArray(response.data.jobs) ? response.data.jobs : [];
+    }
     return response;
   },
   (error) => {
-    console.error("Error:", error);
+    console.error("API Error:", error.message);
     return Promise.reject(error);
   }
 );

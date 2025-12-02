@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/JobList.css';
 
 const JobList = ({ jobs, onDeleteJob, loading }) => {
+  const jobsArray = Array.isArray(jobs) ? jobs : [];
+  
   const getStatusIcon = (status) => {
     switch (status) {
       case 'completed': return '✅';
@@ -35,7 +37,7 @@ const JobList = ({ jobs, onDeleteJob, loading }) => {
   return (
     <div className="job-list">
       <div className="job-list-header">
-        <h3>Processing Jobs ({jobs.length})</h3>
+        <h3>Processing Jobs ({jobsArray.length})</h3>
         <button 
           className="refresh-btn"
           onClick={() => window.location.reload()}
@@ -44,19 +46,19 @@ const JobList = ({ jobs, onDeleteJob, loading }) => {
         </button>
       </div>
 
-      {jobs.length === 0 ? (
+      {jobsArray.length === 0 ? (
         <div className="empty-state">
           <p>No jobs yet. Upload some images to get started!</p>
         </div>
       ) : (
         <div className="jobs-container">
-          {jobs.map(job => (
+          {jobsArray.map(job => (
             <div key={job.id} className={`job-card ${job.status}`}>
               <div className="job-header">
                 <div className="job-info">
-                  <span className="job-id">ID: {job.id.slice(-8)}</span>
+                  <span className="job-id">ID: {job.id?.slice(-8) || 'N/A'}</span>
                   <span className="job-filename">
-                    {job.filename || job.metadata?.originalName || 'Unknown'}
+                    {job.filename || 'Unknown'}
                   </span>
                 </div>
                 <div className="job-actions">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useJobs } from './hooks/useJobs';
 import Header from './components/Header';
 import UploadArea from './components/UploadArea';
